@@ -103,11 +103,18 @@ namespace Tools
                         EditorGUILayout.BeginVertical();
                         foreach (var component in go.GetComponents(typeof(Component)))
                         {
-                            if (GUILayout.Button(component.ToString(), InspectorStyles.minibuttonmid))
+                            if (component != null)
                             {
-                                inspectTarget = component;
-                                stoped = true;
-                                break;
+                                if (GUILayout.Button(component.ToString(), InspectorStyles.minibuttonmid))
+                                {
+                                    inspectTarget = component;
+                                    stoped = true;
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                GUILayout.Label("missing script", InspectorStyles.flow_background);
                             }
                         }
                         EditorGUILayout.EndVertical();
